@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+</head>
+<title>Считать ворон</title>
+  <style>
+    body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        label, input, button {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    
+ <h1>Считать ворон</h1>
+    <form id="crowsForm">
+        <label for="num">Количество ворон:</label>
+        <input type="number" id="num" name="num" required min="0">
+        <button type="submit">Считать</button>
+    </form>
+
+    <script>
+        document.getElementById('crowsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const numInput = document.getElementById('num').value;
+            const num = Math.floor(Number(numInput));
+
+            if (isNaN(num) || num < 0) {
+                alert("Пожалуйста, введите корректное положительное число");
+                return;
+            }
+
+            if (num === 0) {
+                alert("На ветке никого нет");
+                return;
+            }
+
+            let word;
+
+            // Вариант через switch
+            switch (true) {
+                case (num % 100 >= 11 && num % 100 <= 14):
+                    word = "ворон";
+                    break;
+                case (num % 10 === 1):
+                    word = "ворона";
+                    break;
+                case (num % 10 >= 2 && num % 10 <= 4):
+                    word = "вороны";
+                    break;
+                default:
+                    word = "ворон";
+            }
+
+            alert(`На ветке сидит ${num} ${word}`);
+        });
+    </script>
+</body>
+</html>
