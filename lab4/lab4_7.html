@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 7</title>
+</head>
+<body>
+    <h1>Функция, которая возвращает число секунд, прошедших с начала текущего дня</h1>
+    <p>Результаты выведены в консоль</p>
+    <script>
+        function getSecondsToday() {
+            const now = new Date();
+            const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            return Math.floor((now - todayStart) / 1000);
+        }
+        
+        console.log(getSecondsToday());
+    </script>
+</body>
+</html>

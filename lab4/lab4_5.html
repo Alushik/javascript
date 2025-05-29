@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 5</title>
+</head>
+<body>
+    <h1>Метод addClass(cls) и removeClass(cls)</h1>
+    <p>Результаты выведены в консоль</p>
+     <script>
+        let obj = {
+            className: 'open menu',
+            
+            addClass(cls) {
+                const classes = this.className.split(' ');
+                if (!classes.includes(cls)) {
+                    classes.push(cls);
+                    this.className = classes.join(' ').trim();
+                }
+                return this;
+            },
+            
+            removeClass(cls) {
+                const classes = this.className.split(' ');
+                const index = classes.indexOf(cls);
+                if (index !== -1) {
+                    classes.splice(index, 1);
+                    this.className = classes.join(' ').trim();
+                }
+                return this;
+            }
+        };
+        
+        console.log(obj.addClass('new').className); // "open menu new"
+        console.log(obj.removeClass('open').className); // "menu new"
+    </script>
+</body>
+</html>

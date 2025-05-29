@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <link rel="icon" href="../assets_main/favicon.ico" type="image/x-icon">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Задание 3</title>
 </head>
 <body>
+    <h1>Класс Book улучшенный, который сортирует по году выпуска</h1>
+    <p>Результаты выведены в консоль</p>
     <script>
         function Book(title, pubYear, price) {
             this.title = title;
@@ -17,9 +20,9 @@
         };
         
         const books = [
-            new Book("Book A", 2010, 500),
-            new Book("Book B", 2005, 300),
-            new Book("Book C", 2020, 1000)
+            new Book("Дневник памяти", 1994, 700),
+            new Book("Спеши любить", 1999, 650),
+            new Book("Лучшее во мне", 2011, 1000)
         ];
         
         books.sort(Book.compare);

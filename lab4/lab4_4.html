@@ -3,30 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 3</title>
+    <title>Задание 4</title>
 </head>
 <body>
-    <h1>Класс Book улучшенный, который сортирует по году выпуска</h1>
+    <h1>Функция isEmpty(obj), которая возвращает true, если в объекте нет свойств </h1>
     <p>Результаты выведены в консоль</p>
-    <script>
-        function Book(title, pubYear, price) {
-            this.title = title;
-            this.pubYear = pubYear;
-            this.price = price;
+     <script>
+        function isEmpty(obj) {
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) return false;
+            }
+            return Object.getOwnPropertySymbols(obj).length === 0;
         }
         
-        Book.compare = function(a, b) {
-            return a.pubYear - b.pubYear;
-        };
+        const obj = { [Symbol()]: true };
+        console.log(isEmpty(obj)); // false
         
-        const books = [
-            new Book("Дневник памяти", 1994, 700),
-            new Book("Спеши любить", 1999, 650),
-            new Book("Лучшее во мне", 2011, 1000)
-        ];
-        
-        books.sort(Book.compare);
-        console.log(books);
+        const emptyObj = {};
+        console.log(isEmpty(emptyObj)); // true
     </script>
 </body>
 </html>
