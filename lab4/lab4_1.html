@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Задание 1</title>
+</head>
+<body>
+    <h1>Класс Book</h1>
+    <p>Название и цена выведены в консоль</p>
+    <script>
+        function Book(title, pubYear, price) {
+            this.title = title;
+            this.pubYear = pubYear;
+            this.price = price;
+            
+            this.show = function() {
+                console.log(`Название: ${this.title}, Цена: ${this.price}`);
+            };
+        }
+        
+        const book = new Book("JavaScript", 2020, 1000);
+        book.show();
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" href="../assets_main/favicon.ico" type="image/x-icon">
+    <title>Задание 3</title>
+</head>
+<body>
+    <script>
+        function Book(title, pubYear, price) {
+            this.title = title;
+            this.pubYear = pubYear;
+            this.price = price;
+        }
+        
+        Book.compare = function(a, b) {
+            return a.pubYear - b.pubYear;
+        };
+        
+        const books = [
+            new Book("Book A", 2010, 500),
+            new Book("Book B", 2005, 300),
+            new Book("Book C", 2020, 1000)
+        ];
+        
+        books.sort(Book.compare);
+        console.log(books);
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 2</title>
+</head>
+<body>
+    <h1>Класс Book улучшенный</h1>
+    <p>Название и цена выведены в консоль</p>
+     <script>
+        function Book(title, pubYear, price) {
+            let _title = title;
+            let _pubYear = pubYear;
+            let _price = price;
+            
+            Object.defineProperties(this, {
+                title: {
+                    get() { return _title; },
+                    set(value) {
+                        if (value.trim() !== "") {
+                            _title = value;
+                        } else {
+                            console.error("Название не может быть пустым");
+                        }
+                    }
+                },
+                pubYear: {
+                    get() { return _pubYear; },
+                    set(value) {
+                        if (value > 0) {
+                            _pubYear = value;
+                        } else {
+                            console.error("Год издания должен быть положительным");
+                        }
+                    }
+                },
+                price: {
+                    get() { return _price; },
+                    set(value) {
+                        if (value > 0) {
+                            _price = value;
+                        } else {
+                            console.error("Цена должна быть положительной");
+                        }
+                    }
+                }
+            });
+        }
+        
+        const book = new Book("JavaScript", 2020, 1000);
+        console.log(book.title, book.pubYear, book.price);
+        
+        book.title = "New Title";
+        book.pubYear = 2024;
+        book.price = 5000;
+        
+        console.log(book.title, book.pubYear, book.price);
+        
+        book.title = ""; // Ошибка
+        book.pubYear = -1; // Ошибка
+        book.price = -100; // Ошибка
+    </script>
+</body>
+</html>
