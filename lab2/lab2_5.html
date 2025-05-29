@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Числа Фибоначчи</title>
+    <script src="lab2.js"></script>
+        <style>
+        body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        }
+        h1 {
+        text-align: center;
+        }   
+    </style>
+</head>
+<body>
+    <h1>Вычисление n-го числа Фибоначчи</h1>
+    <p>Введите номер числа Фибоначчи:</p>
+    <input type="number" id="position">
+    <button onclick="calculateFib()">Вычислить</button>
+    <p id="result"></p>
+
+    <script>
+        function calculateFib() {
+            const n = parseInt(document.getElementById('position').value);
+            const result = fib(n);
+            document.getElementById('result').textContent = `fib(${n}) = ${result}`;
+        }
+    </script>
+</body>
+</html>

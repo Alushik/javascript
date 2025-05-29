@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Сумма чисел</title>
+    <script src="lab2.js"></script>
+            <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1 {
+            text-align: center;
+            }
+         </style>
+</head>
+<body>
+    <h1>Вычисление суммы чисел от 1 до n</h1>
+    <p>Введите число n:</p>
+    <input type="number" id="number">
+    <button onclick="calculateSum()">Вычислить сумму</button>
+    <p id="result"></p>
+
+    <script>
+        function calculateSum() {
+            const n = parseInt(document.getElementById('number').value);
+            const result = sumTo(n);
+            document.getElementById('result').textContent = `Сумма чисел от 1 до ${n} = ${result}`;
+        }
+    </script>
+</body>
+</html>

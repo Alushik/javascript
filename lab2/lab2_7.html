@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Сумма чисел</title>
+    <script src="lab2.js"></script>
+        <style>
+        body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        }
+        h1 {
+        text-align: center;
+        }   
+    </style>
+</head>
+<body>
+    <h1>Сумма чисел</h1>
+    <p>Введите числа через запятую:</p>
+    <input type="text" id="numbers">
+    <button onclick="calculateSum()">Вычислить сумму</button>
+    <p id="result"></p>
+
+    <script>
+        function calculateSum() {
+            const input = document.getElementById('numbers').value;
+            const numbers = input.split(',').map(num => parseFloat(num.trim()));
+            const result = sum(...numbers);
+            document.getElementById('result').textContent = `Сумма: ${result}`;
+        }
+    </script>
+</body>
+</html>
