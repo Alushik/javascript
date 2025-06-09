@@ -1,7 +1,7 @@
 /**
  * Возвращает дробную часть числа
- * @param {number} num - Исходное число
- * @returns {number} - Дробная часть числа
+ * @param {number} num 
+ * @returns {number}
  */
 export function getDecimal(num) {
     const decimal = num - Math.floor(num);
@@ -9,9 +9,9 @@ export function getDecimal(num) {
 }
 
 /**
- * Возвращает адрес с добавлением https:// в начале
- * @param {string} url - Исходный адрес
- * @returns {string} - Изменённый адрес
+ * Нормализует URL, добавляя https:// в начало при необходимости
+ * @param {string} url
+ * @returns {string}
  */
 export function normalizeUrl(url) {
     if (url.startsWith('http://')) {
@@ -24,22 +24,22 @@ export function normalizeUrl(url) {
 }
 
 /**
- * Возвращает true, если строка содержит 'viagra' или 'XXX'
- * @param {string} str - Исходная строка
- * @returns {boolean} - Значение true or false
+ * Проверяет строку на наличие спама (viagra или XXX)
+ * @param {string} str
+ * @returns {boolean}
  */
-export function checkSpam(str){
+export function checkSpam(str) {
     const lowerStr = str.toLowerCase();
     return lowerStr.includes('viagra') || lowerStr.includes('xxx');
 }
 
 /**
- * Проверяет длину строки и добавляет многоточие, если необходимо
- * @param {string} str - Исходная строка
- * @param {number} maxlength - Максимальная длина строки
- * @returns {string} - Усеченная строка
+ * Усекает строку до указанной длины, добавляя многоточие при необходимости
+ * @param {string} str
+ * @param {number} maxlength 
+ * @returns {string}
  */
-export function truncate(str, maxlength){
+export function truncate(str, maxlength) {
     if (str.length <= maxlength) {
         return str;
     }
@@ -47,26 +47,33 @@ export function truncate(str, maxlength){
 }
 
 /**
- * Преобразует строку, удаляя дефис и все слова после него получают заглавную букву
- * @param {string} str - Исходная строка
- * @returns {string} - Изменнёная строка
+ * Преобразует строку с дефисами в camelCase
+ * @param {string} str
+ * @returns {string}
  */
 export function camelize(str) {
-  return str
-    .split('-')                        
-    .filter(part => part !== '')         
-    .map((part, index) => {            
-      return index === 0 
-        ? part 
-        : part[0].toUpperCase() + part.slice(1)
-    })
-    .join('');                
+    return str.split(/[-]+/).map((word, index) => {
+        if (index === 0) {
+            return word;
+        }
+        return ucFirst(word);
+    }).join('');
 }
 
 /**
- * Вычисляет n-е число Фибоначчи
- * @param {number} n - Количество чисел Фибоначчи
- * @returns {bigint[]} Массив чисел Фибоначчи
+ * Преобразует первую букву строки в верхний регистр
+ * @param {string} str
+ * @returns {string}
+ */
+function ucFirst(str) {
+    if (!str) return str;
+    return str[0].toUpperCase() + str.slice(1);
+}
+
+/**
+ * Возвращает массив чисел Фибоначчи до n-го (не включая)
+ * @param {number} n
+ * @returns {bigint[]}
  */
 export function fibs(n) {
     if (n <= 0) return [];
@@ -78,19 +85,19 @@ export function fibs(n) {
 }
 
 /**
- * Распологает массив в порядке убывания
- * @param {number[]} arr - Исходный массив
- * @returns {number[]} - Новый массив
+ * Возвращает новый массив, отсортированный по убыванию
+ * @param {number[]} arr
+ * @returns {number[]}
  */
-export function arrReverseSorted(arr){
+export function arrReverseSorted(arr) {
     return [...arr].sort((a, b) => b - a);
 }
 
 /**
- * Возвращаяет массив с уникальными значениями
- * @param {any[]} arr - Исходный массив
- * @returns {any[]} - Новый массив
+ * Возвращает массив уникальных значений
+ * @param {any[]} arr
+ * @returns {any[]}
  */
-export function unique(arr){
+export function unique(arr) {
     return [...new Set(arr)];
 }
