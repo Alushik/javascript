@@ -72,7 +72,7 @@
     <p id="result"></p>
 
     <script>
-        'use strict';
+        
         class Book {
             constructor(title, pubYear, price) {
                 this._title = title;
@@ -90,9 +90,11 @@
             get pubYear() {
                 return this._pubYear;
             }
-            set pubYear(value) {
+           set pubYear(value) {
                 if (typeof value === 'number' && value > 0) {
                     this._pubYear = value;
+                } else {
+                    alert('Год публикации должен быть положительным числом.');
                 }
             }
             get price() {
@@ -101,6 +103,8 @@
             set price(value) {
                 if (typeof value === 'number' && value > 0) {
                     this._price = value;
+                } else {
+                    alert('Цена должна быть положительным числом.');
                 }
             }
             show() {
