@@ -73,43 +73,51 @@
 
     <script>
         'use strict';
-        class Book {
-            constructor(title, pubYear, price) {
-                this._title = title;
-                this._pubYear = pubYear;
-                this._price = price;
-            }
-            get title() {
-                return this._title;
-            }
-            set title(value) {
-                if (typeof value === 'string' && value.trim() !== '') {
-                    this._title = value.trim();
-                }
-            }
-            get pubYear() {
-                return this._pubYear;
-            }
-           set pubYear(value) {
-                if (typeof value === 'number' && value > 0) {
-                    this._pubYear = value;
-                } else {
-                    alert('Год публикации должен быть положительным числом.');
-                }
-            }
-            get price() {
-                return this._price;
-            }
-            set price(value) {
-                if (typeof value === 'number' && value > 0) {
-                    this._price = value;
-                } else {
-                    alert('Цена должна быть положительным числом.');
-                }
-            }
-            show() {
-                return `Название: ${this.title}\nГод: ${this.pubYear}\nЦена: ${this.price}`;
-            }
+       class Book {
+    constructor(title, pubYear, price) {
+        this.title = title;
+        this.pubYear = pubYear;
+        this.price = price;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(text) {
+        if (typeof text !== 'string' || text.trim() === '') {
+            throw new Error('Title must be a non-empty string.');
+        }
+        this._title = text.trim();
+    }
+
+    get pubYear() {
+        return this._pubYear;
+    }
+
+    set pubYear(newPubYear) {
+        if (typeof newPubYear !== 'number' || newPubYear <= 0 || !Number.isInteger(newPubYear)) {
+            throw new Error('pubYear must be a positive integer.');
+        }
+        this._pubYear = newPubYear;
+    }
+
+    get price() {
+        return this._price;
+    }
+
+    set price(newPrice) {
+        if (typeof newPrice !== 'number' || newPrice <= 0) {
+            throw new Error('Price must be a positive number.');
+        }
+        this._price = newPrice;
+    }
+
+    show() {
+        console.log(`Название: ${this._title},
+Год публикации: ${this._pubYear},
+Цена: ${this._price}`);
+    }
         }
 
         const book = new Book('Начальное название', 2000, 100);
