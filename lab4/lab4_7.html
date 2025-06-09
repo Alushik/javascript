@@ -1,21 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 7</title>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Задача 7</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1E3A8A;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #BFDBFE;
+            color: #1E3A8A;
+            border: 1px solid #93C5FD;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #93C5FD;
+        }
+
+        p#result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            word-break: break-word;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Функция, которая возвращает число секунд, прошедших с начала текущего дня</h1>
-    <p>Результаты выведены в консоль</p>
+    <h1>getSecondsToday()</h1>
+    <button id="btnSeconds">Показать секунды с начала дня</button>
+    <p id="result"></p>
+
     <script>
         function getSecondsToday() {
             const now = new Date();
-            const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            return Math.floor((now - todayStart) / 1000);
+            const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            return Math.floor((now - start) / 1000);
         }
-        
-        console.log(getSecondsToday());
+
+        document.getElementById('btnSeconds').addEventListener('click', () => {
+            document.getElementById('result').textContent = `Прошло секунд с начала дня: ${getSecondsToday()}`;
+        });
     </script>
 </body>
+
 </html>

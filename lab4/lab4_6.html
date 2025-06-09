@@ -1,29 +1,85 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 6</title>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Задача 6</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        color: #1E3A8A;
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    button {
+        cursor: pointer;
+        background-color: #BFDBFE;
+        color: #1E3A8A;
+        border: 1px solid #93C5FD;
+        border-radius: 5px;
+        padding: 8px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+    button:hover {
+        background-color: #93C5FD;
+    }
+    pre#result {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 16px;
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: #e3f2fd;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #90caf9;
+    }
+</style>
 </head>
 <body>
-    <h1>Преобразование в JSON</h1>
-    <p>Результаты выведены в консоль</p>
-     <script>
-        const obj = {
-            name: "Test",
-            data: {
-                value: 42,
-                nested: {
-                    flag: true
-                }
-            }
-        };
-        
-        const json = JSON.stringify(obj, null, 2);
-        console.log(json);
-        
-        const obj2 = JSON.parse(json);
-        console.log(JSON.stringify(obj) === JSON.stringify(obj2)); // true
-    </script>
+<h1>Задача 6: JSON и сравнение объектов</h1>
+<button id="btnJson">Преобразовать и проверить</button>
+<pre id="result"></pre>
+
+<script>
+const obj = {
+    name: "Тест",
+    info: {
+        year: 2025,
+        city: "Москва"
+    }
+};
+
+function deepEqual(a, b) {
+    if (a === b) return true;
+    if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null) return false;
+    let keysA = Object.keys(a);
+    let keysB = Object.keys(b);
+    if (keysA.length !== keysB.length) return false;
+    for (let key of keysA) {
+        if (!keysB.includes(key)) return false;
+        if (!deepEqual(a[key], b[key])) return false;
+    }
+    return true;
+}
+
+function doJson() {
+    const jsonStr = JSON.stringify(obj, null, 2);
+    const obj2 = JSON.parse(jsonStr);
+    const equal = deepEqual(obj, obj2);
+    document.getElementById('result').textContent = `JSON строка:\n${jsonStr}\n\nОбъекты равны: ${equal}`;
+}
+
+document.getElementById('btnJson').addEventListener('click', doJson);
+</script>
 </body>
 </html>

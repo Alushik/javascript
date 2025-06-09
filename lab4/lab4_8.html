@@ -1,23 +1,96 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 8</title>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Задача 8</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1E3A8A;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input,
+        button {
+            padding: 8px;
+            font-size: 16px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input {
+            border: 1px solid #60A5FA;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #3B82F6;
+            box-shadow: 0 0 4px rgba(59, 130, 246, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #BFDBFE;
+            color: #1E3A8A;
+            border: 1px solid #93C5FD;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #93C5FD;
+        }
+
+        p#result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            min-height: 24px;
+            word-break: break-word;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Функция, которая возвращает дату date в виде строки формата "дд.мм.гг"</h1>
-    <p>Результаты выведены в консоль</p>
+    <h1>formatDate(date)</h1>
+    <input id="dateInput" type="date" />
+    <button id="btnFormat">Показать форматированную дату</button>
+    <p id="result"></p>
+
     <script>
         function formatDate(date) {
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const year = String(date.getFullYear()).slice(-2);
-            return `${day}.${month}.${year}`;
+            const dd = String(date.getDate()).padStart(2, '0');
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const yy = String(date.getFullYear()).slice(-2);
+            return `${dd}.${mm}.${yy}`;
         }
-        
-        const today = new Date();
-        console.log(formatDate(today)); // Например: "18.05.25"
+
+        function showFormattedDate() {
+            const val = document.getElementById('dateInput').value;
+            if (!val) {
+                alert('Выберите дату');
+                return;
+            }
+            const date = new Date(val);
+            document.getElementById('result').textContent = formatDate(date);
+        }
+
+        document.getElementById('btnFormat').addEventListener('click', showFormattedDate);
+        document.getElementById('dateInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter') showFormattedDate();
+        });
     </script>
 </body>
+
 </html>

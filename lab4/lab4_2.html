@@ -1,65 +1,133 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 2</title>
-</head>
-<body>
-    <h1>Класс Book улучшенный</h1>
-    <p>Название и цена выведены в консоль</p>
-     <script>
-        function Book(title, pubYear, price) {
-            let _title = title;
-            let _pubYear = pubYear;
-            let _price = price;
-            
-            Object.defineProperties(this, {
-                title: {
-                    get() { return _title; },
-                    set(value) {
-                        if (value.trim() !== "") {
-                            _title = value;
-                        } else {
-                            console.error("Название не может быть пустым");
-                        }
-                    }
-                },
-                pubYear: {
-                    get() { return _pubYear; },
-                    set(value) {
-                        if (value > 0) {
-                            _pubYear = value;
-                        } else {
-                            console.error("Год издания должен быть положительным");
-                        }
-                    }
-                },
-                price: {
-                    get() { return _price; },
-                    set(value) {
-                        if (value > 0) {
-                            _price = value;
-                        } else {
-                            console.error("Цена должна быть положительной");
-                        }
-                    }
-                }
-            });
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Задача 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1E3A8A;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
         }
-        
-        const book = new Book("JavaScript", 2020, 1000);
-        console.log(book.title, book.pubYear, book.price);
-        
-        book.title = "New Title";
-        book.pubYear = 2024;
-        book.price = 5000;
-        
-        console.log(book.title, book.pubYear, book.price);
-        
-        book.title = ""; // Ошибка
-        book.pubYear = -1; // Ошибка
-        book.price = -100; // Ошибка
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input,
+        button {
+            padding: 8px;
+            font-size: 16px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input {
+            border: 1px solid #60A5FA;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #3B82F6;
+            box-shadow: 0 0 4px rgba(59, 130, 246, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #BFDBFE;
+            color: #1E3A8A;
+            border: 1px solid #93C5FD;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #93C5FD;
+        }
+
+        p#result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            min-height: 24px;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Геттеры и сеттеры в классе Book</h1>
+    <input id="title" type="text" placeholder="Название книги" />
+    <input id="pubYear" type="number" placeholder="Год публикации" />
+    <input id="price" type="number" placeholder="Цена" step="0.01" />
+    <button id="btnSet">Установить свойства</button>
+    <p id="result"></p>
+
+    <script>
+        class Book {
+            constructor(title, pubYear, price) {
+                this._title = title;
+                this._pubYear = pubYear;
+                this._price = price;
+            }
+            get title() {
+                return this._title;
+            }
+            set title(value) {
+                if (typeof value === 'string' && value.trim() !== '') {
+                    this._title = value.trim();
+                }
+            }
+            get pubYear() {
+                return this._pubYear;
+            }
+            set pubYear(value) {
+                if (typeof value === 'number' && value > 0) {
+                    this._pubYear = value;
+                }
+            }
+            get price() {
+                return this._price;
+            }
+            set price(value) {
+                if (typeof value === 'number' && value > 0) {
+                    this._price = value;
+                }
+            }
+            show() {
+                return `Название: ${this.title}\nГод: ${this.pubYear}\nЦена: ${this.price}`;
+            }
+        }
+
+        const book = new Book('Начальное название', 2000, 100);
+
+        function setProperties() {
+            const title = document.getElementById('title').value;
+            const pubYear = Number(document.getElementById('pubYear').value);
+            const price = Number(document.getElementById('price').value);
+
+            book.title = title;
+            book.pubYear = pubYear;
+            book.price = price;
+
+            document.getElementById('result').textContent = book.show();
+        }
+
+        document.getElementById('btnSet').addEventListener('click', setProperties);
+        ['title', 'pubYear', 'price'].forEach(id => {
+            document.getElementById(id).addEventListener('keydown', e => {
+                if (e.key === 'Enter') setProperties();
+            });
+        });
     </script>
 </body>
+
 </html>

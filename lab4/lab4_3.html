@@ -1,32 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 3</title>
-</head>
-<body>
-    <h1>Класс Book улучшенный, который сортирует по году выпуска</h1>
-    <p>Результаты выведены в консоль</p>
-    <script>
-        function Book(title, pubYear, price) {
-            this.title = title;
-            this.pubYear = pubYear;
-            this.price = price;
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Задача 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1E3A8A;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
         }
-        
-        Book.compare = function(a, b) {
-            return a.pubYear - b.pubYear;
-        };
-        
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #BFDBFE;
+            color: #1E3A8A;
+            border: 1px solid #93C5FD;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #93C5FD;
+        }
+
+        p#result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Статический метод Book.compare</h1>
+    <button id="btnSort">Отсортировать книги по году</button>
+    <p id="result"></p>
+
+    <script>
+        class Book {
+            constructor(title, pubYear, price) {
+                this.title = title;
+                this.pubYear = pubYear;
+                this.price = price;
+            }
+            static compare(a, b) {
+                return a.pubYear - b.pubYear;
+            }
+            show() {
+                return `${this.title} (${this.pubYear}) - ${this.price} руб.`;
+            }
+        }
+
         const books = [
-            new Book("Дневник памяти", 1994, 700),
-            new Book("Спеши любить", 1999, 650),
-            new Book("Лучшее во мне", 2011, 1000)
+            new Book('Книга 1', 2010, 300),
+            new Book('Книга 2', 2005, 250),
+            new Book('Книга 3', 2020, 500),
         ];
-        
-        books.sort(Book.compare);
-        console.log(books);
+
+        function sortBooks() {
+            books.sort(Book.compare);
+            const resultText = books.map(book => book.show()).join('\n');
+            document.getElementById('result').textContent = resultText;
+        }
+
+        document.getElementById('btnSort').addEventListener('click', sortBooks);
     </script>
 </body>
+
 </html>

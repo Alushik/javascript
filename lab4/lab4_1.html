@@ -1,26 +1,128 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Задание 1</title>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Задачи с Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1E3A8A;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input,
+        button {
+            padding: 8px;
+            font-size: 16px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input {
+            border: 1px solid #60A5FA;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #3B82F6;
+            box-shadow: 0 0 4px rgba(59, 130, 246, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #BFDBFE;
+            color: #1E3A8A;
+            border: 1px solid #93C5FD;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #93C5FD;
+        }
+
+        p#result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            min-height: 24px;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #93C5FD;
+            padding-bottom: 20px;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Класс Book</h1>
-    <p>Название и цена выведены в консоль</p>
+    <section>
+        <input id="title1" type="text" placeholder="Название книги" />
+        <input id="pubYear1" type="number" placeholder="Год публикации" />
+        <input id="price1" type="number" placeholder="Цена" step="0.01" />
+        <button id="btnShow1">Показать название и цену</button>
+        <p id="result1"></p>
+    </section>
+
     <script>
-        function Book(title, pubYear, price) {
-            this.title = title;
-            this.pubYear = pubYear;
-            this.price = price;
-            
-            this.show = function() {
+        class Book {
+            constructor(title, pubYear, price) {
+                this.title = title;
+                this.pubYear = pubYear;
+                this.price = price;
+            }
+            show() {
                 console.log(`Название: ${this.title}, Цена: ${this.price}`);
-            };
+                return `Название: ${this.title}\nЦена: ${this.price}`;
+            }
         }
-        
-        const book = new Book("JavaScript", 2020, 1000);
-        book.show();
+
+        function createAndShowBook() {
+            const title = document.getElementById('title1').value.trim();
+            const pubYear = Number(document.getElementById('pubYear1').value);
+            const price = Number(document.getElementById('price1').value);
+
+            if (!title) {
+                alert('Введите название книги');
+                return;
+            }
+            if (!(pubYear > 0)) {
+                alert('Введите корректный год публикации');
+                return;
+            }
+            if (!(price > 0)) {
+                alert('Введите корректную цену');
+                return;
+            }
+
+            const book = new Book(title, pubYear, price);
+            const result = book.show();
+            document.getElementById('result1').textContent = result;
+        }
+
+        document.getElementById('btnShow1').addEventListener('click', createAndShowBook);
+
+        ['title1', 'pubYear1', 'price1'].forEach(id => {
+            document.getElementById(id).addEventListener('keydown', e => {
+                if (e.key === 'Enter') createAndShowBook();
+            });
+        });
     </script>
 </body>
+
 </html>

@@ -1,26 +1,72 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задание 4</title>
-</head>
-<body>
-    <h1>Функция isEmpty(obj), которая возвращает true, если в объекте нет свойств </h1>
-    <p>Результаты выведены в консоль</p>
-     <script>
-        function isEmpty(obj) {
-            for (let key in obj) {
-                if (obj.hasOwnProperty(key)) return false;
-            }
-            return Object.getOwnPropertySymbols(obj).length === 0;
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Задача 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1E3A8A;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
         }
-        
-        const obj = { [Symbol()]: true };
-        console.log(isEmpty(obj)); // false
-        
-        const emptyObj = {};
-        console.log(isEmpty(emptyObj)); // true
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #BFDBFE;
+            color: #1E3A8A;
+            border: 1px solid #93C5FD;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #93C5FD;
+        }
+
+        p#result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Проверка пустоты объекта</h1>
+    <button id="btnCheck">Проверить объект {[Symbol()]: true}</button>
+    <p id="result"></p>
+
+    <script>
+        function isEmpty(obj) {
+            return Reflect.ownKeys(obj).length === 0;
+        }
+
+        const testObj = {
+            [Symbol()]: true
+        };
+
+        function checkEmpty() {
+            const res = isEmpty(testObj);
+            document.getElementById('result').textContent = `Объект пуст? ${res}`;
+        }
+
+        document.getElementById('btnCheck').addEventListener('click', checkEmpty);
     </script>
 </body>
+
 </html>
