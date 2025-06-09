@@ -13,7 +13,7 @@ function isEmpty(obj) {
  */
  function checkEmpty() {
             const res = isEmpty(testObj);
-            document.getElementById('result').textContent = Объект пуст? ${res};
+            document.getElementById('result').textContent = `Объект пуст? ${res}`;
         }
 
 
@@ -49,7 +49,7 @@ function removeClass() {
  */
 function deepEqual(a, b) {
     if (a === b) return true;
-    if (typeof a !== 'object'  typeof b !== 'object'  a == null || b == null) return false;
+    if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null) return false;
     let keysA = Object.keys(a);
     let keysB = Object.keys(b);
     if (keysA.length !== keysB.length) return false;
@@ -67,7 +67,7 @@ function doJson() {
     const jsonStr = JSON.stringify(obj, null, 2);
     const obj2 = JSON.parse(jsonStr);
     const equal = deepEqual(obj, obj2);
-    document.getElementById('result').textContent = JSON строка:\n${jsonStr}\n\nОбъекты равны: ${equal};
+   document.getElementById('result').textContent = `JSON строка:\n${jsonStr}\n\nОбъекты равны: ${equal}`;
 }
 
 
@@ -90,7 +90,7 @@ function formatDate(date) {
             const dd = String(date.getDate()).padStart(2, '0');
             const mm = String(date.getMonth() + 1).padStart(2, '0');
             const yy = String(date.getFullYear()).slice(-2);
-            return ${dd}.${mm}.${yy};
+            return `${dd}.${mm}.${yy}`;
         }
 
 
